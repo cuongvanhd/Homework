@@ -4,10 +4,7 @@
  */
 package business;
 
-import com.sun.xml.internal.xsom.impl.ListSimpleTypeImpl;
-
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Class ListFile include method to list file and folder
@@ -38,13 +35,4 @@ public interface ListFile {
 	 * @return String path
 	 */
 	public String getPathCurrentFolder();
-
-    /**
-     * Method using to check hidden file
-     * @param file
-     * @return true if file is hidden, false if file is hidden
-     */
-    public boolean checkHiddenFile(File file);
-
-
 }

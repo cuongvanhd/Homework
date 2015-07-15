@@ -5,9 +5,6 @@
 package business.impl;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-
 import business.ListFile;
 
 /**
@@ -18,83 +15,62 @@ import business.ListFile;
  */
 public class ListFileImpl implements ListFile {
 
-    /*
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see business.ListFile#listFile(java.lang.String)
 	 */
-    @Override
-    public File[] listFile(String pathFile) {
+	@Override
+	public File[] listFile(String pathFile) {
 
-        // create file
-        File folder = new File(pathFile);
+		// create file
+		File folder = new File(pathFile);
 
-        // create list file
-        File[] lsFile = null;
+		// create list file
+		File[] lsFile = null;
 
-        try {
+		try {
 
-            // get list file from directory
-            lsFile = folder.listFiles();
+			// get list file from directory
+			lsFile = folder.listFiles();
 
-        } catch (Exception e) {
-            System.out.println("Exception in listFile: " + e.getMessage());
-        }
+		} catch (Exception e) {
+			System.out.println("Exception in listFile: " + e.getMessage());
+		}
 
-        // return
-        return lsFile;
-    }
+		// return
+		return lsFile;
+	}
 
-    /*
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see business.ListFile#printListFile(java.io.File[])
 	 */
-    @Override
-    public void printListFile(File[] listFile) {
-        try {
-            for (int i = 0; i < listFile.length; i++) {
-                if (listFile[i].isFile()) {
-                    System.out.println("File:  " + listFile[i].getName());
-                } else if (listFile[i].isDirectory()) {
-                    System.out.println("Directory: " + listFile[i].getName());
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Exception in printFile: " + e.getMessage());
-        }
+	@Override
+	public void printListFile(File[] listFile) {
+		try {
+			for (int i = 0; i < listFile.length; i++) {
+				if (listFile[i].isFile()) {
+					System.out.println("File:  " + listFile[i].getName());
+				} else if (listFile[i].isDirectory()) {
+					System.out.println("Directory: " + listFile[i].getName());
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Exception in printFile: " + e.getMessage());
+		}
 
-    }
+	}
 
-    /*
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see business.ListFile#getPathCurrentFolder()
 	 */
-    @Override
-    public String getPathCurrentFolder() {
-        String path = new File(".").getAbsoluteFile().getParent();
-        return path;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean checkHiddenFile(File file) {
-
-        boolean flag = false;
-
-        if (file.isHidden()) {
-            flag = true;
-        }
-
-        return flag;
-    }
-
-    public ListFileImpl() {
-        super();
-    }
+	@Override
+	public String getPathCurrentFolder() {
+		String path = new File(".").getAbsoluteFile().getParent();
+		return path;
+	}
 }
