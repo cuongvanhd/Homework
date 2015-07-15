@@ -64,18 +64,19 @@ public class FileIOImpl implements FileIO {
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
 			// read row by row
-			String line = null;
+			String line = bufferedReader.readLine();
 
 			// browser file
-			while ((line = bufferedReader.readLine()) != null) {
+			while (line != null) {
 				stringBuilder.append(line + "\n");
+				line = bufferedReader.readLine();
 			}
 
 			// close reader
 			inputStreamReader.close();
 
-		} catch (IOException e) {
-			System.out.println("File not found: " + pathFile);
+		} catch (Exception e) {
+			System.out.println("readFileTxt: File not found: " + pathFile);
 		}
 
 		// return
@@ -145,6 +146,8 @@ public class FileIOImpl implements FileIO {
 		} catch (Exception e) {
 			System.out.println("ex: " + e.getMessage());
 		}
+
+		// return
 		return paragraphs;
 
 	}
@@ -161,7 +164,8 @@ public class FileIOImpl implements FileIO {
 
 		try {
 			PdfReader reader = new PdfReader(pathFile);
-			System.out.println("This PDF has " + reader.getNumberOfPages() + " pages.");
+			// System.out.println("This PDF has " + reader.getNumberOfPages() +
+			// " pages.");
 			content = PdfTextExtractor.getTextFromPage(reader, 1);
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
@@ -306,7 +310,8 @@ public class FileIOImpl implements FileIO {
 
 			Element rootNode = document.getRootElement();
 
-			listRoot = rootNode.getChildren("staff");
+			// get all children
+			listRoot = rootNode.getChildren();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

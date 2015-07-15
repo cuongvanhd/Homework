@@ -12,10 +12,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.jdom.Element;
 
+import until.Common;
 import business.impl.FileIOImpl;
 
 /**
- * class Test to test application
+ * Class Test to test application
  * 
  * @author Cuong
  *
@@ -35,76 +36,86 @@ public class Test {
 
 			String pathFile = null;
 
+			String extension = null;
+
 			String content = null;
 
-			// declare funcion variable
-			int function;
-			while (true) {
-				Scanner scanner = new Scanner(System.in);
+			/*
+			 * if args.length > 0 then read file from command-line argument else
+			 * read file from keyboard
+			 */
+			if (args.length > 0) {
 
-				System.out.print("\n Close programer,press 0");
-				System.out.print("\n Read text file, press 1");
-				System.out.print("\n Read doc file, press 2");
-				System.out.print("\nRead docx file press 3");
-				System.out.print("\nRead pdf file, press 4");
-				System.out.print("\nRead xls file, press 5");
-				System.out.print("\nRead xlsx file, press 6");
-				System.out.print("\nRead xml file, press 7");
-				System.out.print("\n---------------*******************------------------");
+				for (int i = 0; i < args.length; i++) {
+					pathFile = args[i];
 
-				function = scanner.nextInt();
+					// get index of character
+					int index = Common.getIndexOfCharacter(pathFile, '.');
 
-				switch (function) {
-				case 0:
-					System.exit(0);
-					break;
+					// get extension in pathFile
+					extension = Common.getExtentionFile(pathFile, index);
+					try {
 
-				case 1:
-					pathFile = "D://Bộ thủ.txt";
-					content = fileIOImpl.readFileTxt(pathFile);
-					System.out.println(content);
-					break;
+						System.out.println("\n-------Read file " + extension + "------------\n");
 
-				case 2:
-					pathFile = "D://kanji.doc";
-					String[] fileData = fileIOImpl.readDocFile(pathFile);
-					fileIOImpl.printValueDocFile(fileData);
-					break;
+						switch (extension) {
 
-				case 3:
-					pathFile = "D://履歴書ー英語・日本語.docx";
-					List<XWPFParagraph> paragraphs = fileIOImpl.readDocxFile(pathFile);
-					fileIOImpl.printValueDocxFile(paragraphs);
-					break;
+						case "txt":
+							content = fileIOImpl.readFileTxt(pathFile);
+							System.out.println(content);
+							Thread.sleep(1000);
+							break;
 
-				case 4:
-					pathFile = "D://JQuery.pdf";
-					content = fileIOImpl.readPdfFile(pathFile);
-					System.out.println(content);
-					break;
+						case "doc":
+							String[] fileData = fileIOImpl.readDocFile(pathFile);
+							fileIOImpl.printValueDocFile(fileData);
+							Thread.sleep(1000);
+							break;
 
-				case 5:
-					pathFile = "D://Book1.xls";
-					Iterator<Row> rowIterator = fileIOImpl.readXlsFile(pathFile);
-					fileIOImpl.printValueExcel(rowIterator);
-					break;
+						case "docx":
+							List<XWPFParagraph> paragraphs = fileIOImpl.readDocxFile(pathFile);
+							fileIOImpl.printValueDocxFile(paragraphs);
+							Thread.sleep(1000);
+							break;
 
-				case 6:
-					pathFile = "D://Book1.xlsx";
-					Iterator<Row> rowIterator1 = fileIOImpl.readXlsxFile(pathFile);
-					fileIOImpl.printValueExcel(rowIterator1);
-					break;
+						case "xls":
+							Iterator<Row> rowIterator = fileIOImpl.readXlsFile(pathFile);
+							fileIOImpl.printValueExcel(rowIterator);
+							Thread.sleep(1000);
+							break;
 
-				case 7:
-					pathFile = "D://file.xml";
-					List<Element> listRoot = fileIOImpl.readXmlFile(pathFile);
-					fileIOImpl.printRootXmlFile(listRoot);
-					break;
+						case "xlsx":
+							Iterator<Row> rowIterator1 = fileIOImpl.readXlsxFile(pathFile);
+							fileIOImpl.printValueExcel(rowIterator1);
+							Thread.sleep(1000);
+							break;
 
-				default:
-					System.out.println("Please choose 1 - 7!");
-					break;
+						case "pdf":
+							content = fileIOImpl.readPdfFile(pathFile);
+							System.out.println(content);
+							Thread.sleep(1000);
+							break;
+
+						case "xml":
+							List<Element> listRoot = fileIOImpl.readXmlFile(pathFile);
+							fileIOImpl.printRootXmlFile(listRoot);
+							Thread.sleep(1000);
+							break;
+
+						default:
+							System.out.println("extension not found");
+						}
+
+					} catch (InterruptedException e) {
+						System.out.println("Exception main - InterruptedException: " + e.getMessage());
+					}
 				}
+
+			} else {
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Please enter the characters: ");
+				content = scanner.nextLine();
+				System.out.println("The first token: " + content);
 			}
 
 		} catch (Exception e) {
