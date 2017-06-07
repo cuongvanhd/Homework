@@ -1,0 +1,7 @@
+https://www.javacodegeeks.com/2013/01/spring-data-jpa-and-pagination.html
+
+https://stackoverflow.com/questions/10527124/how-to-query-data-via-spring-data-jpa-by-sort-and-pageable-both-out-of-box
+
+http://www.programcreek.com/java-api-examples/index.php?api=org.springframework.data.domain.Pageable
+
+http://springinpractice.com/2012/05/11/pagination-and-sorting-with-spring-data-jpa  (ok)
