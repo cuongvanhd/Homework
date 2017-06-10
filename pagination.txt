@@ -5,3 +5,5 @@ https://stackoverflow.com/questions/10527124/how-to-query-data-via-spring-data-j
 http://www.programcreek.com/java-api-examples/index.php?api=org.springframework.data.domain.Pageable
 
 http://springinpractice.com/2012/05/11/pagination-and-sorting-with-spring-data-jpa  (ok)
+
+https://css-tricks.com/number-increment-buttons/
